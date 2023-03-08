@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     let box: UIView = {
         let box = UIView(frame: .zero)
         box.backgroundColor = .systemMint
-        box.layer.cornerRadius = 5
+        box.layer.cornerRadius = 10
         return box
     }()
 
@@ -44,8 +44,9 @@ class ViewController: UIViewController {
         
         animator = UIViewPropertyAnimator(duration: 2, curve: .easeInOut) { [unowned self, box] in
             box.center.x = self.stackView.frame.width - 60
-            box.transform = CGAffineTransform(rotationAngle: CGFloat.pi).scaledBy(x: 1.5, y: 1.5)
+            box.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2).scaledBy(x: 1.5, y: 1.5)
         }
+        animator.pausesOnCompletion = true
         // Do any additional setup after loading the view.
     }
     
@@ -81,7 +82,6 @@ class ViewController: UIViewController {
             sender.setValue(sender.maximumValue, animated: true)
         })
         animator.continueAnimation(withTimingParameters: self.animator.timingParameters, durationFactor: 0.4)
-        animator.pausesOnCompletion = true
     }
     
     @objc func sliderTouch(_ sender: UISlider) {
